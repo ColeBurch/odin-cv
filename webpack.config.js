@@ -14,10 +14,6 @@ module.exports = (env, argv) => {
       static: "./dist",
     },
     plugins: [
-      new MiniCssExtractPlugin({
-        filename: "[name].bundle.css",
-        chunkFilename: "[id].css",
-      }),
       new HtmlWebpackPlugin({
         title: "Development",
       }),
