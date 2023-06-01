@@ -1,7 +1,9 @@
 import * as React from "react";
 import { Component } from "react";
 
-type PersonalInfoFormProps = {};
+type PersonalInfoFormProps = {
+  getPersonalInfo: Function;
+};
 
 type PersonalInfoFormState = {
   firstName: string;
@@ -58,8 +60,12 @@ class PersonalInfoForm extends Component<
   };
 
   handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    alert(
-      `${this.state.firstName} , ${this.state.lastName} , ${this.state.address} , ${this.state.phoneNumber} , ${this.state.email}`
+    this.props.getPersonalInfo(
+      this.state.firstName,
+      this.state.lastName,
+      this.state.address,
+      this.state.phoneNumber,
+      this.state.email
     );
     event.preventDefault();
   };
