@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Component } from "react";
 import PersonalInfoForm from "./PersonalInfoForm";
+import ExperienceFormHandler from "./ExperienceFormHandler";
 import CV from "./CV";
 
 type MainBoxProps = {};
@@ -54,6 +55,7 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     return (
       <div className="flex flex-col flex-grow bg-gray-100 rounded-lg shadow-lg overflow-hidden min-h-screen items-center">
         <PersonalInfoForm getPersonalInfo={this.getPersonalInfo} />
+        <ExperienceFormHandler />
         <CV personalInfo={this.state.personalInfo} />
       </div>
     );

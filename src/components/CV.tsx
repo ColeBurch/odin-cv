@@ -25,7 +25,7 @@ class CV extends Component<personalInfo, CVState> {
       this.props.personalInfo;
     return (
       <div>
-        {firstName} {lastName} lives at {address}, {phoneNumber}, {email}
+        {firstName} {lastName} {address} {phoneNumber} {email}
       </div>
     );
   }
