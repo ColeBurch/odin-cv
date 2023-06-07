@@ -24,7 +24,7 @@ class PersonalInfoForm extends Component<
       firstName: "",
       lastName: "",
       address: "",
-      phoneNumber: null,
+      phoneNumber: undefined,
       email: "",
     };
   }

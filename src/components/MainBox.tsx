@@ -6,7 +6,7 @@ import CV from "./CV";
 type MainBoxProps = {};
 
 type MainBoxState = {
-  firstName: string;
+  personalInfo: object;
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
@@ -14,7 +14,13 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     super(props);
 
     this.state = {
-      firstName: "",
+      personalInfo: {
+        firstName: "",
+        lastName: "",
+        address: "",
+        phoneNumber: undefined,
+        email: "",
+      },
     };
 
     this.getPersonalInfo = this.getPersonalInfo.bind(this);
@@ -27,11 +33,14 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     phoneNumber: number,
     email: string
   ) {
-    console.log(
-      `Hello ${firstName} ${lastName}, you live at ${address}. Your phone number is ${phoneNumber} and your email is ${email}`
-    );
     this.setState({
-      firstName: firstName,
+      personalInfo: {
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        phoneNumber: phoneNumber,
+        email: email,
+      },
     });
   }
 
@@ -39,7 +48,7 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     return (
       <div className="flex flex-col flex-grow bg-gray-100 rounded-lg shadow-lg overflow-hidden min-h-screen items-center">
         <PersonalInfoForm getPersonalInfo={this.getPersonalInfo} />
-        <CV firstName={this.state.firstName} />
+        <CV personalInfo={this.state.personalInfo} />
       </div>
     );
   }

@@ -2,7 +2,7 @@ import * as React from "react";
 import { Component } from "react";
 
 type CVProps = {
-  firstName: string;
+  personalInfo: object;
 };
 
 type CVState = {};
@@ -15,11 +15,7 @@ class CV extends Component<CVProps, CVState> {
   }
 
   render() {
-    return (
-      <div>
-        <div>{this.props.firstName}</div>
-      </div>
-    );
+    return <div></div>;
   }
 }
 
