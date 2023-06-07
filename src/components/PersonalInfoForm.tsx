@@ -114,7 +114,9 @@ class PersonalInfoForm extends Component<
           onChange={this.handleEmailChange}
           className="rounded-lg"
         />
-        <button type="submit">Submit</button>
+        <button type="submit" className="bg-white rounded-lg">
+          Submit Personal Info
+        </button>
       </form>
     );
   }

@@ -6,7 +6,13 @@ import CV from "./CV";
 type MainBoxProps = {};
 
 type MainBoxState = {
-  personalInfo: object;
+  personalInfo: {
+    firstName: string;
+    lastName: string;
+    address: string;
+    phoneNumber: number;
+    email: string;
+  };
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
