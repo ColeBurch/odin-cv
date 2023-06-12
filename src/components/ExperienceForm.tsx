@@ -3,6 +3,7 @@ import { Component } from "react";
 
 type ExperienceFormProps = {
   IDProp: number;
+  getExperienceInfo: Function;
 };
 
 type ExperienceFormState = {
@@ -59,14 +60,24 @@ class ExperienceForm extends Component<
     });
   };
 
-  handleSubmit = (event: React.ChangeEvent<HTMLFormElement>) => {
-    console.log(this.state);
+  handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    this.props.getExperienceInfo(
+      this.props.IDProp,
+      this.state.position,
+      this.state.company,
+      this.state.city,
+      this.state.beginningYear,
+      this.state.endingYear
+    );
     event.preventDefault();
   };
 
   render() {
     return (
-      <div className="flex flex-col flex-grow box-border gap-3 bg-gray-300">
+      <form
+        onSubmit={this.handleSubmit}
+        className="flex flex-col flex-grow box-border gap-3 bg-gray-300"
+      >
         <div className="text-xl font-bold text-gray-800">
           Position {this.props.IDProp}
         </div>
@@ -105,7 +116,10 @@ class ExperienceForm extends Component<
           onChange={this.handleEndingYearChange}
           className="rounded-lg"
         />
-      </div>
+        <button type="submit" className="">
+          submit
+        </button>
+      </form>
     );
   }
 }
