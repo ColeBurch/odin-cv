@@ -77,6 +77,7 @@ class ExperienceForm extends Component<
       <form
         onSubmit={this.handleSubmit}
         className="flex flex-col flex-grow box-border gap-3 bg-gray-300"
+        id={String(this.props.IDProp)}
       >
         <div className="text-xl font-bold text-gray-800">
           Position {this.props.IDProp}
@@ -116,7 +117,7 @@ class ExperienceForm extends Component<
           onChange={this.handleEndingYearChange}
           className="rounded-lg"
         />
-        <button type="submit" className="">
+        <button type="submit" className="bg-white rounded-lg">
           submit
         </button>
       </form>

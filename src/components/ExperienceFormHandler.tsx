@@ -2,10 +2,19 @@ import * as React from "react";
 import { useState } from "react";
 import ExperienceForm from "./ExperienceForm";
 
+type ExperienceInfoArray = {
+  ID: number;
+  position: string;
+  company: string;
+  city: string;
+  beginningYear: number;
+  endingYear: number;
+}[];
+
 function ExperienceFormHandler() {
   const ExperienceArray = [1, 2];
 
-  function submitHandler() {}
+  const ExperienceInfoArray: ExperienceInfoArray = [];
 
   function getExperienceInfo(
     ID: number,
@@ -15,6 +24,9 @@ function ExperienceFormHandler() {
     beginningYear: number,
     endingYear: number
   ) {
+    const check: boolean = ExperienceInfoArray.some(
+      (Experience) => Experience.ID === ID
+    );
     const experienceInfo = {
       ID: ID,
       position: position,
@@ -23,7 +35,17 @@ function ExperienceFormHandler() {
       beginningYear: beginningYear,
       endingYear: endingYear,
     };
-    console.log(experienceInfo);
+    if (check === false) {
+      ExperienceInfoArray.push(experienceInfo);
+      console.log(ExperienceInfoArray);
+    } else {
+      ExperienceInfoArray.splice(
+        ExperienceInfoArray.findIndex((Experience) => Experience.ID === ID),
+        1
+      );
+      ExperienceInfoArray.push(experienceInfo);
+      console.log(ExperienceInfoArray);
+    }
   }
 
   return (
@@ -36,9 +58,6 @@ function ExperienceFormHandler() {
           getExperienceInfo={getExperienceInfo}
         />
       ))}
-      <button onClick={submitHandler} className="bg-white rounded-lg">
-        Submit Experience
-      </button>
     </div>
   );
 }
