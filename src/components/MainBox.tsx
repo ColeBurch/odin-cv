@@ -14,6 +14,14 @@ type MainBoxState = {
     phoneNumber: number;
     email: string;
   };
+  experienceInfo: {
+    ID: number;
+    position: string;
+    company: string;
+    city: string;
+    beginningYear: number;
+    endingYear: number;
+  }[];
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
@@ -28,9 +36,20 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
         phoneNumber: undefined,
         email: "",
       },
+      experienceInfo: [
+        {
+          ID: undefined,
+          position: "",
+          company: "",
+          city: "",
+          beginningYear: undefined,
+          endingYear: undefined,
+        },
+      ],
     };
 
     this.getPersonalInfo = this.getPersonalInfo.bind(this);
+    this.passExperienceInfo = this.passExperienceInfo.bind(this);
   }
 
   getPersonalInfo(
@@ -51,11 +70,15 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     });
   }
 
+  passExperienceInfo(ExperienceInfo: Array<object>) {
+    console.log(ExperienceInfo[0]);
+  }
+
   render() {
     return (
       <div className="flex flex-col flex-grow bg-gray-100 rounded-lg shadow-lg overflow-hidden min-h-screen items-center">
         <PersonalInfoForm getPersonalInfo={this.getPersonalInfo} />
-        <ExperienceFormHandler />
+        <ExperienceFormHandler passExperienceInfo={this.passExperienceInfo} />
         <CV personalInfo={this.state.personalInfo} />
       </div>
     );

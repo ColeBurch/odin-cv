@@ -11,8 +11,12 @@ type ExperienceInfoArray = {
   endingYear: number;
 }[];
 
-function ExperienceFormHandler() {
-  const ExperienceArray = [1, 2];
+type ExperienceFormHandlerProps = {
+  passExperienceInfo: Function;
+};
+
+const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
+  const ExperienceArray = [1];
 
   const ExperienceInfoArray: ExperienceInfoArray = [];
 
@@ -37,14 +41,14 @@ function ExperienceFormHandler() {
     };
     if (check === false) {
       ExperienceInfoArray.push(experienceInfo);
-      console.log(ExperienceInfoArray);
+      props.passExperienceInfo(ExperienceInfoArray);
     } else {
       ExperienceInfoArray.splice(
         ExperienceInfoArray.findIndex((Experience) => Experience.ID === ID),
         1
       );
       ExperienceInfoArray.push(experienceInfo);
-      console.log(ExperienceInfoArray);
+      props.passExperienceInfo(ExperienceInfoArray);
     }
   }
 
@@ -60,6 +64,6 @@ function ExperienceFormHandler() {
       ))}
     </div>
   );
-}
+};
 
 export default ExperienceFormHandler;
