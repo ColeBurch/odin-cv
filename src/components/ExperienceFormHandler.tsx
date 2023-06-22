@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ExperienceForm from "./ExperienceForm";
 
 type ExperienceInfoArray = {
@@ -16,9 +16,15 @@ type ExperienceFormHandlerProps = {
 };
 
 const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
-  const ExperienceArray = [1];
+  const [ExperienceArray, setExperienceArray] = useState([1]);
 
-  const ExperienceInfoArray: ExperienceInfoArray = [];
+  const [experienceCount, setExperienceCount] = useState(2);
+
+  const [ExperienceInfoArray, setExperienceInfoArray] = useState([]);
+
+  useEffect(() => {
+    props.passExperienceInfo(ExperienceInfoArray);
+  }, [ExperienceInfoArray]);
 
   function getExperienceInfo(
     ID: number,
@@ -28,9 +34,6 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
     beginningYear: number,
     endingYear: number
   ) {
-    const check: boolean = ExperienceInfoArray.some(
-      (Experience) => Experience.ID === ID
-    );
     const experienceInfo = {
       ID: ID,
       position: position,
@@ -39,17 +42,34 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
       beginningYear: beginningYear,
       endingYear: endingYear,
     };
+    let check: boolean = ExperienceInfoArray.some(
+      (Experience) => Experience.ID === experienceInfo.ID
+    );
     if (check === false) {
-      ExperienceInfoArray.push(experienceInfo);
-      props.passExperienceInfo(ExperienceInfoArray);
-    } else {
-      ExperienceInfoArray.splice(
-        ExperienceInfoArray.findIndex((Experience) => Experience.ID === ID),
-        1
+      setExperienceInfoArray(
+        [...ExperienceInfoArray, experienceInfo].sort(function (a, b) {
+          return a.ID - b.ID;
+        })
       );
-      ExperienceInfoArray.push(experienceInfo);
-      props.passExperienceInfo(ExperienceInfoArray);
+    } else {
+      setExperienceInfoArray(
+        [
+          ...ExperienceInfoArray.filter((Experience) => Experience.ID !== ID),
+          experienceInfo,
+        ].sort(function (a, b) {
+          return a.ID - b.ID;
+        })
+      );
     }
+  }
+
+  function passExperience() {
+    props.passExperienceInfo(ExperienceInfoArray);
+  }
+
+  function addExperience() {
+    setExperienceCount((prevexperienceCount) => prevexperienceCount + 1);
+    setExperienceArray([...ExperienceArray, experienceCount]);
   }
 
   return (
@@ -62,6 +82,7 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
           getExperienceInfo={getExperienceInfo}
         />
       ))}
+      <button onClick={addExperience}>Add Experience</button>
     </div>
   );
 };

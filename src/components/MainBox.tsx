@@ -4,6 +4,15 @@ import PersonalInfoForm from "./PersonalInfoForm";
 import ExperienceFormHandler from "./ExperienceFormHandler";
 import CV from "./CV";
 
+type ExperienceInfo = {
+  ID: number;
+  position: string;
+  company: string;
+  city: string;
+  beginningYear: number;
+  endingYear: number;
+};
+
 type MainBoxProps = {};
 
 type MainBoxState = {
@@ -14,14 +23,7 @@ type MainBoxState = {
     phoneNumber: number;
     email: string;
   };
-  experienceInfo: {
-    ID: number;
-    position: string;
-    company: string;
-    city: string;
-    beginningYear: number;
-    endingYear: number;
-  }[];
+  ExperienceInfoArray: Array<object>;
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
@@ -36,16 +38,7 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
         phoneNumber: undefined,
         email: "",
       },
-      experienceInfo: [
-        {
-          ID: undefined,
-          position: "",
-          company: "",
-          city: "",
-          beginningYear: undefined,
-          endingYear: undefined,
-        },
-      ],
+      ExperienceInfoArray: [],
     };
 
     this.getPersonalInfo = this.getPersonalInfo.bind(this);
@@ -70,16 +63,21 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     });
   }
 
-  passExperienceInfo(ExperienceInfo: Array<object>) {
-    console.log(ExperienceInfo[0]);
-  }
+  passExperienceInfo = (ExperienceInfo: Array<object>) => {
+    this.setState({
+      ExperienceInfoArray: ExperienceInfo,
+    });
+  };
 
   render() {
     return (
       <div className="flex flex-col flex-grow bg-gray-100 rounded-lg shadow-lg overflow-hidden min-h-screen items-center">
         <PersonalInfoForm getPersonalInfo={this.getPersonalInfo} />
         <ExperienceFormHandler passExperienceInfo={this.passExperienceInfo} />
-        <CV personalInfo={this.state.personalInfo} />
+        <CV
+          personalInfo={this.state.personalInfo}
+          ExperienceInfoArray={this.state.ExperienceInfoArray}
+        />
       </div>
     );
   }

@@ -1,7 +1,16 @@
 import * as React from "react";
 import { Component } from "react";
 
-type personalInfo = {
+type ExperienceInfo = {
+  ID?: number;
+  position?: string;
+  company?: string;
+  city?: string;
+  beginningYear?: number;
+  endingYear?: number;
+};
+
+type CVInfo = {
   personalInfo: {
     firstName: string;
     lastName: string;
@@ -9,12 +18,13 @@ type personalInfo = {
     phoneNumber: number;
     email: string;
   };
+  ExperienceInfoArray: Array<ExperienceInfo>;
 };
 
 type CVState = {};
 
-class CV extends Component<personalInfo, CVState> {
-  constructor(props: personalInfo) {
+class CV extends Component<CVInfo, CVState> {
+  constructor(props: CVInfo) {
     super(props);
 
     this.state = {};
@@ -25,7 +35,14 @@ class CV extends Component<personalInfo, CVState> {
       this.props.personalInfo;
     return (
       <div>
-        {firstName} {lastName} {address} {phoneNumber} {email}
+        <div>
+          {firstName} {lastName} {address} {phoneNumber} {email}
+        </div>
+        <div>
+          {this.props.ExperienceInfoArray.map((Experience) => (
+            <div>{Experience.position}</div>
+          ))}
+        </div>
       </div>
     );
   }
