@@ -63,13 +63,20 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
     }
   }
 
-  function passExperience() {
-    props.passExperienceInfo(ExperienceInfoArray);
+  function addExperience() {
+    setExperienceArray([...ExperienceArray, experienceCount]);
+    setExperienceCount((prevexperienceCount) => prevexperienceCount + 1);
   }
 
-  function addExperience() {
-    setExperienceCount((prevexperienceCount) => prevexperienceCount + 1);
-    setExperienceArray([...ExperienceArray, experienceCount]);
+  function removeExperience() {
+    setExperienceArray([
+      ...ExperienceArray.filter(
+        (Experience) => Experience !== experienceCount - 1
+      ),
+    ]);
+    if (experienceCount > 1) {
+      setExperienceCount((prevExperienceCount) => prevExperienceCount - 1);
+    }
   }
 
   return (
@@ -82,7 +89,12 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
           getExperienceInfo={getExperienceInfo}
         />
       ))}
-      <button onClick={addExperience}>Add Experience</button>
+      <button onClick={addExperience} className="bg-white rounded-lg">
+        Add Position
+      </button>
+      <button onClick={removeExperience} className="bg-white rounded-lg">
+        Remove Position
+      </button>
     </div>
   );
 };
