@@ -2,14 +2,14 @@ import * as React from "react";
 import { useState, useEffect } from "react";
 import ExperienceForm from "./ExperienceForm";
 
-type ExperienceInfoArray = {
-  ID: number;
-  position: string;
-  company: string;
-  city: string;
-  beginningYear: number;
-  endingYear: number;
-}[];
+type ExperienceInfoObject = {
+  ID?: number;
+  position?: string;
+  company?: string;
+  city?: string;
+  beginningYear?: number;
+  endingYear?: number;
+};
 
 type ExperienceFormHandlerProps = {
   passExperienceInfo: Function;
@@ -20,7 +20,9 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
 
   const [experienceCount, setExperienceCount] = useState(2);
 
-  const [ExperienceInfoArray, setExperienceInfoArray] = useState([]);
+  const [ExperienceInfoArray, setExperienceInfoArray] = useState<
+    ExperienceInfoObject[] | null
+  >([]);
 
   useEffect(() => {
     props.passExperienceInfo(ExperienceInfoArray);
