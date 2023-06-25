@@ -10,6 +10,16 @@ type ExperienceInfo = {
   endingYear?: number;
 };
 
+type EducationInfo = {
+  ID?: number;
+  degree?: string;
+  subject?: string;
+  universityName?: string;
+  cityName?: string;
+  startDate?: number;
+  endDate?: number;
+};
+
 type CVInfo = {
   personalInfo: {
     firstName: string;
@@ -19,6 +29,7 @@ type CVInfo = {
     email: string;
   };
   ExperienceInfoArray: Array<ExperienceInfo>;
+  EducationInfoArray: Array<EducationInfo>;
 };
 
 type CVState = {};
@@ -41,6 +52,11 @@ class CV extends Component<CVInfo, CVState> {
         <div>
           {this.props.ExperienceInfoArray.map((Experience) => (
             <div>{Experience.position}</div>
+          ))}
+        </div>
+        <div>
+          {this.props.EducationInfoArray.map((education) => (
+            <div>{education.degree}</div>
           ))}
         </div>
       </div>

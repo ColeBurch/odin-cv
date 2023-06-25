@@ -2,6 +2,7 @@ import * as React from "react";
 import { Component } from "react";
 import PersonalInfoForm from "./PersonalInfoForm";
 import ExperienceFormHandler from "./ExperienceFormHandler";
+import EducationFormHandler from "./EducationFormHandler";
 import CV from "./CV";
 
 type ExperienceInfo = {
@@ -11,6 +12,16 @@ type ExperienceInfo = {
   city?: string;
   beginningYear?: number;
   endingYear?: number;
+};
+
+type EducationInfo = {
+  ID?: number;
+  degree?: string;
+  subject?: string;
+  universityName?: string;
+  cityName?: string;
+  startDate?: number;
+  endDate?: number;
 };
 
 type MainBoxProps = {};
@@ -24,6 +35,7 @@ type MainBoxState = {
     email: string;
   };
   ExperienceInfoArray: Array<ExperienceInfo | null>;
+  EducationInfoArray: Array<EducationInfo | null>;
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
@@ -39,9 +51,11 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
         email: "",
       },
       ExperienceInfoArray: [],
+      EducationInfoArray: [],
     };
 
     this.getPersonalInfo = this.getPersonalInfo.bind(this);
+    this.passExperienceInfo = this.passExperienceInfo.bind(this);
     this.passExperienceInfo = this.passExperienceInfo.bind(this);
   }
 
@@ -69,14 +83,22 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     });
   };
 
+  passEducationInfo = (EducationInfo: Array<EducationInfo | null>) => {
+    this.setState({
+      EducationInfoArray: EducationInfo,
+    });
+  };
+
   render() {
     return (
       <div className="flex flex-col flex-grow bg-gray-100 rounded-lg shadow-lg overflow-hidden min-h-screen items-center">
         <PersonalInfoForm getPersonalInfo={this.getPersonalInfo} />
         <ExperienceFormHandler passExperienceInfo={this.passExperienceInfo} />
+        <EducationFormHandler passEducationInfo={this.passEducationInfo} />
         <CV
           personalInfo={this.state.personalInfo}
           ExperienceInfoArray={this.state.ExperienceInfoArray}
+          EducationInfoArray={this.state.EducationInfoArray}
         />
       </div>
     );

@@ -78,6 +78,9 @@ const EducationForm = (props: ExperienceFormProps) => {
         onChange={(e) => setEndDate(Number(e.target.value))}
         className="rounded-lg"
       />
+      <button type="submit" className="bg-white rounded-lg">
+        submit
+      </button>
     </form>
   );
 };

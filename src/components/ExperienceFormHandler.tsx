@@ -76,6 +76,11 @@ const ExperienceFormHandler = (props: ExperienceFormHandlerProps) => {
         (Experience) => Experience !== experienceCount - 1
       ),
     ]);
+    setExperienceInfoArray([
+      ...ExperienceInfoArray.filter(
+        (experience) => experience.ID !== experienceCount - 1
+      ),
+    ]);
     if (experienceCount > 1) {
       setExperienceCount((prevExperienceCount) => prevExperienceCount - 1);
     }
