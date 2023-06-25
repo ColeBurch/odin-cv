@@ -5,12 +5,12 @@ import ExperienceFormHandler from "./ExperienceFormHandler";
 import CV from "./CV";
 
 type ExperienceInfo = {
-  ID: number;
-  position: string;
-  company: string;
-  city: string;
-  beginningYear: number;
-  endingYear: number;
+  ID?: number;
+  position?: string;
+  company?: string;
+  city?: string;
+  beginningYear?: number;
+  endingYear?: number;
 };
 
 type MainBoxProps = {};
@@ -23,7 +23,7 @@ type MainBoxState = {
     phoneNumber: number;
     email: string;
   };
-  ExperienceInfoArray: Array<object>;
+  ExperienceInfoArray: Array<ExperienceInfo | null>;
 };
 
 class MainBox extends Component<MainBoxProps, MainBoxState> {
@@ -63,7 +63,7 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
     });
   }
 
-  passExperienceInfo = (ExperienceInfo: Array<object>) => {
+  passExperienceInfo = (ExperienceInfo: Array<ExperienceInfo | null>) => {
     this.setState({
       ExperienceInfoArray: ExperienceInfo,
     });
