@@ -31,7 +31,7 @@ type MainBoxState = {
     firstName: string;
     lastName: string;
     address: string;
-    phoneNumber: number;
+    phoneNumber: number | null;
     email: string;
   };
   ExperienceInfoArray: Array<ExperienceInfo | null>;
@@ -47,7 +47,7 @@ class MainBox extends Component<MainBoxProps, MainBoxState> {
         firstName: "",
         lastName: "",
         address: "",
-        phoneNumber: undefined,
+        phoneNumber: null,
         email: "",
       },
       ExperienceInfoArray: [],

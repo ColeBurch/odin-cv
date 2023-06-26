@@ -45,20 +45,23 @@ class CV extends Component<CVInfo, CVState> {
     const { firstName, lastName, address, phoneNumber, email } =
       this.props.personalInfo;
     return (
-      <div>
+      <div className="flex flex-col flex-grow box-border w-1/2 p-4 gap-3 bg-gray-300">
         <div>
           {firstName} {lastName} {address} {phoneNumber} {email}
         </div>
-        <div>
-          {this.props.ExperienceInfoArray.map((Experience) => (
-            <div>{Experience.position}</div>
-          ))}
-        </div>
-        <div>
-          {this.props.EducationInfoArray.map((education) => (
-            <div>{education.degree}</div>
-          ))}
-        </div>
+        {this.props.ExperienceInfoArray.map((Experience) => (
+          <div key={Experience.ID}>
+            {Experience.position} at {Experience.company} in {Experience.city}{" "}
+            from {Experience.beginningYear} to {Experience.endingYear}
+          </div>
+        ))}
+        {this.props.EducationInfoArray.map((education) => (
+          <div key={education.ID}>
+            {education.degree} in {education.subject} from{" "}
+            {education.universityName} in {education.cityName} attending from{" "}
+            {education.startDate} to {education.endDate}
+          </div>
+        ))}
       </div>
     );
   }

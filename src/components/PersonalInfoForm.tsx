@@ -9,7 +9,7 @@ type PersonalInfoFormState = {
   firstName: string;
   lastName: string;
   address: string;
-  phoneNumber: number;
+  phoneNumber: number | null;
   email: string;
 };
 
@@ -24,7 +24,7 @@ class PersonalInfoForm extends Component<
       firstName: "",
       lastName: "",
       address: "",
-      phoneNumber: undefined,
+      phoneNumber: null,
       email: "",
     };
   }

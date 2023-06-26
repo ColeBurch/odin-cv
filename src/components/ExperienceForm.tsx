@@ -10,8 +10,8 @@ type ExperienceFormState = {
   position: string;
   company: string;
   city: string;
-  beginningYear: number;
-  endingYear: number;
+  beginningYear: number | null;
+  endingYear: number | null;
 };
 
 class ExperienceForm extends Component<
@@ -25,8 +25,8 @@ class ExperienceForm extends Component<
       position: "",
       company: "",
       city: "",
-      beginningYear: undefined,
-      endingYear: undefined,
+      beginningYear: null,
+      endingYear: null,
     };
   }
 
